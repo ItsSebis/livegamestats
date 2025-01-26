@@ -21,7 +21,7 @@ class Players extends Model
     // protected $primaryKey = 'id';
     // public $timestamps = false;
     protected $guarded = ['id'];
-    protected $fillable = [];
+    // protected $fillable = [];
     // protected $hidden = [];
 
     /*

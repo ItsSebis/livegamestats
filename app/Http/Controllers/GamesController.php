@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Games;
+use App\Models\Players;
 
 class GamesController extends Controller {
     public function index() {
@@ -14,7 +15,19 @@ class GamesController extends Controller {
     }
 
     public function edit($game) {
-        return view('game.edit', ['game' => Games::where('id', $game)->first()]);
+        $game = Games::where('id', $game)->first();
+        return view('game.edit', [
+            'game' => $game,
+            'home' => Players::query()
+                ->where('gameId', $game->id)
+                ->where('teamId', $game->home)
+                ->orderBy('number')
+                ->get(),
+            'guest' => Players::query()
+                ->where('gameId', $game->id)
+                ->where('teamId', $game->guest)
+                ->orderBy('number')
+                ->get()]);
     }
 
     public function show($game) {
@@ -29,8 +42,42 @@ class GamesController extends Controller {
         $game->guest = request('guest');
         $game->owner = auth()->user()->id;
 
+        if ($game->home === $game->guest) {
+            return redirect(route('game.create'));
+        }
+
         $game->save();
 
-        return redirect(route('game.index'));
+        return redirect(route('game.edit', ['game' => $game->id]));
+    }
+
+    public function storePlayer() {
+        // Validate the request...
+        $player = new Players();
+
+        $player->gameId = request('gameId');
+        $player->teamId = request('teamId');
+        $player->name = request('name');
+        $player->number = request('number');
+        if (request('goalkeeper') === 'on') {
+            $player->goalkeeper = true;
+        } else {
+            $player->goalkeeper = false;
+        }
+
+        $player->save();
+
+        return redirect(route('game.edit', ['game' => request('gameId')]));
+    }
+
+    public function removePlayer($player) {
+        $player = Players::where('id', $player)->first();
+        $game = $player->gameId;
+        $player->delete();
+        return redirect(route('game.edit', ['game' => $game]));
+    }
+
+    public function addPlayer($game, $team) {
+        return view('game.addPlayer', ['game' => $game, 'team' => $team]);
     }
 }

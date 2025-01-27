@@ -1,0 +1,41 @@
+.player-table {
+    width: 100%; /* Full-width table */
+    border-collapse: collapse; /* Removes gaps between cells */
+    margin: 20px 0; /* Adds spacing around table */
+    text-align: center; /* Centers text inside cells */
+    font-size: 0.9rem;
+}
+
+.player-table th, .player-table td {
+    border: 1px solid #ccc; /* Light gray border for table cells */
+    padding: 10px; /* Spacing inside cells */
+}
+
+.player-table thead th {
+    font-weight: bold; /* Make header text bold */
+}
+
+.player-table tbody td {
+    vertical-align: middle; /* Aligns content vertically */
+}
+
+.player-table button {
+    margin: 0; /* Adds spacing between buttons */
+    padding: 5px 10px; /* Makes buttons more clickable */
+    border: 1px solid #007BFF; /* Blue border for buttons */
+    background-color: #007BFF; /* Blue background */
+    color: white; /* White text */
+    border-radius: 5px; /* Rounded corners */
+    cursor: pointer; /* Pointer on hover */
+}
+
+.player-table button:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+}
+
+.player-table span {
+    display: inline-block; /* Ensures proper spacing */
+    margin: 0 10px; /* Space around the number */
+    font-size: 16px; /* Makes the number readable */
+    font-weight: bold; /* Bold number */
+}

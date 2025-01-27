@@ -1,3 +1,4 @@
+@php use App\Models\Teams; @endphp
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
@@ -12,14 +13,12 @@
                     <form method="POST" action="{{ route('game.store') }}">
                         @csrf
                         <div>
-                            <label for="home">Home</label>
-                            <input id="home" class="block mt-1 w-full text-gray-900" type="text" name="home" value="{{old('home')}}"
-                                     required autofocus/>
+                            <label for="home">Home</label><br>
+                            @include('game.components.teamsDropdown', ['selectionId' => 'home', 'teams' => Teams::all()])
                         </div>
                         <div class="mt-4">
-                            <label for="guest">Guest</label>
-                            <input id="guest" class="block mt-1 w-full text-gray-900" type="text" name="guest" value="{{old('guest')}}"
-                                     required/>
+                            <label for="guest">Guest</label><br>
+                            @include('game.components.teamsDropdown', ['selectionId' => 'guest', 'teams' => Teams::all()])
                         </div>
                         <div class="flex items">
                             <button class="ml-4">
@@ -30,4 +29,5 @@
                 </div>
             </div>
         </div>
+    </div>
 </x-app-layout>

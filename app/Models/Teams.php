@@ -30,11 +30,36 @@ class Teams extends Model
     |--------------------------------------------------------------------------
     */
 
+    public function getTeamById($id)
+    {
+        return Teams::where('id', $id)->first();
+    }
+
+    public function getTeamNameNoFail($id)
+    {
+        $team = Teams::where('id', $id)->first();
+        if ($team) {
+            return $team->name;
+        } else {
+            return $id;
+        }
+    }
+
     /*
     |--------------------------------------------------------------------------
     | RELATIONS
     |--------------------------------------------------------------------------
     */
+
+    public function players()
+    {
+        return $this->hasMany(Players::class, 'teamId', 'id');
+    }
+
+    public function games()
+    {
+        return $this->hasMany(Games::class, 'home', 'id')->orWhere('guest', 'id');
+    }
 
     /*
     |--------------------------------------------------------------------------

@@ -1,3 +1,4 @@
+@php use App\Models\Teams; @endphp
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
@@ -14,8 +15,12 @@
                     </a>
                     <ul>
                         @foreach($games as $game)
+                                <?php
+                                $home = Teams::where('id', $game->home)->first();
+                                $guest = Teams::where('id', $game->guest)->first();
+                                ?>
                             <li>
-                                <a href="{{ route('game.edit', $game->id) }}">{{ $game->id . ": " . $game->home . " vs. " . $game->guest }}</a>
+                                <a href="{{ route('game.edit', $game->id) }}">{{ $home->name . " vs. " . $guest->name }}</a>
                             </li>
                         @endforeach
                     </ul>

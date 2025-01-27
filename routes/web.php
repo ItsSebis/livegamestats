@@ -1,14 +1,15 @@
 <?php
 
 use App\Http\Controllers\GamesController;
+use App\Http\Controllers\PlayersController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect(route('dashboard'));
 });
 
-Route::get('/games/show/{game}', [GamesController::class, 'show'])->name('game.show');
+Route::get('/show/{game}', [GamesController::class, 'show'])->name('game.show');
 
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/dashboard', function () {
@@ -19,11 +20,17 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::get('/games/create', [GamesController::class, 'create'])->name('game.create');
 
-    Route::get('/games/{game}', [GamesController::class, 'edit', ])->name('game.edit');
+    Route::get('/games/{game}/addPlayer/{team}', [GamesController::class, 'addPlayer'])->name('game.addPlayer');
+
+    Route::get('/games/{game}', [GamesController::class, 'edit'])->name('game.edit');
 
     Route::post('/game/store', [GamesController::class, 'store'])->name('game.store');
 
-    Route::put('/game/update/{game}', [GamesController::class, 'update'])->name('game.update');
+    Route::post('/game/storePlayer', [GamesController::class, 'storePlayer'])->name('game.storePlayer');
+
+    Route::get('/game/rmPlayer/{player}', [GamesController::class, 'removePlayer'])->name('game.rmPlayer');
+
+    Route::post('/api/player/{player}/update/', [PlayersController::class, 'updateApi'])->name('player.update');
 });
 
 Route::middleware('auth')->group(function () {

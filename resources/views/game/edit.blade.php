@@ -40,7 +40,7 @@
 <script>
     let csrf = "{{ csrf_token() }}";
     function updatePlayer(playerId, column, increase) {
-        fetch('{{config("app.url")}}/api/player/' + playerId + '/update/', {
+        fetch('{{config("app.url")}}/api/player/' + playerId + '/update', {
             method: 'POST', headers: {
                 'Content-Type': 'application/json', 'X-CSRF-TOKEN': csrf,
             }, body: JSON.stringify({'column': column, 'increase': increase})

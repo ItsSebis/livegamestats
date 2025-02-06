@@ -1,6 +1,6 @@
 <div class="">
     <h2 class="text-2xl">{{ $player->number . ": ".$player->name }}</h2>
-    <div class="text-center">
+    <div class="text-center overflow-x-auto">
         <table class="player-table">
             <thead>
             <tr>

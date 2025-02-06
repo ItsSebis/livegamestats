@@ -1,4 +1,4 @@
-<div style="margin: 0 auto">
+<div>
     <h2 class="text-2xl">{{ $player->number . ": ".$player->name }} <a href="{{ route('game.rmPlayer', $player->id) }}">❌</a></h2>
     <div class="text-center overflow-x-auto">
         <table class="player-table">

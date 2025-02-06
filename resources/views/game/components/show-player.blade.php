@@ -16,9 +16,9 @@
             </thead>
             <tbody>
             @php
-            $shotRate = ($player->shots == 0) ? 0 : round($player->goals/$player->shots, 3)*100;
-            $saveRate = ($player->shotsOnGoal == 0) ? 0 : round($player->saves/$player->shotsOnGoal, 3)*100;
-            $sevenRate = ($player->sevenShots == 0) ? 0 : round($player->sevenGoals/$player->sevenShots, 3)*100;
+            $shotRate = ($player->shots == 0) ? "N/A" : round($player->goals/$player->shots, 3)*100;
+            $saveRate = ($player->shotsOnGoal == 0) ? "N/A" : round($player->saves/$player->shotsOnGoal, 3)*100;
+            $sevenRate = ($player->sevenShots == 0) ? "N/A" : round($player->sevenGoals/$player->sevenShots, 3)*100;
             @endphp
             <tr>
                 <td >

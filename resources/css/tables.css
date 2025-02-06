@@ -1,5 +1,6 @@
 .player-table {
-    width: 100%; /* Full-width table */
+    width: max-content;
+    overflow-x: initial; /* Allows horizontal scrolling */
     border-collapse: collapse; /* Removes gaps between cells */
     margin: 20px 0; /* Adds spacing around table */
     text-align: center; /* Centers text inside cells */

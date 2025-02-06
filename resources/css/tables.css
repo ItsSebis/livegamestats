@@ -40,3 +40,6 @@
     font-size: 16px; /* Makes the number readable */
     font-weight: bold; /* Bold number */
 }
+.player-table span {
+    font-size: 1.8rem;
+}
